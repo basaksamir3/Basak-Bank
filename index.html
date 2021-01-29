@@ -4,8 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>welcome to bank</h1>
+    
+
+    <div id="login_area">
+        <h1 class="text-center">Welcome To Basak Bank</h1>
+        <div class="submit_area">
+            <h4>login</h4>
+            <input type="text" class="form-control" placeholder="Enter your Email">
+            <br>
+            <input type="password" class="form-control" name="" id="" placeholder="password">
+            <br>
+            <button id="login" class=" btn btn-success">Enter</button>
+
+        </div>
+    
+    </div>
+
+    <div id="transction-area">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="Diposite status">
+                    <h5>Diposite</h5>
+                    <h2>$<span id="currentDiposit">00</span></h2>
+                </div>
+                
+            </div>
+            <div class="col-md-4 ">
+                <div class="Withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="currentWithdraw">00</span></h2>
+                </div>
+                
+            </div>
+            <div class="col-md-4 ">
+                <div class="Blance status">
+                    <h5>Blance</h5>
+                    <h2>$<span id="currentBlance">1200</span></h2>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-md-6 " >
+                <div class="submit_area ">
+                    <h5>Diposite</h5>
+                    <input id="diposit-amount"type="text" class="form-control" placeholder="$ amount you want to Diposite">
+                    <br>
+                    <button id="addDiposit"class="btn btn-success">Diposite</button>
+                    
+                </div>
+                
+            </div>
+            <div class="col-md-6 ">
+                <div class="submit_area">
+                    <h5>Withdraw</h5>
+                    <input id="withdraw-amount"type="text" class="form-control"  placeholder="$ amount you want to Withdraw">
+                    <br>
+                    <button id="addWithdraw"class="btn btn-success">Withdraw</button>
+                </div>
+                
+            </div>   
+        </div>
+    </div>
+    
+
+    <script>
+        // loginBtn event handaler
+        const loginBtn = document.getElementById('login');
+        loginBtn.addEventListener("click", function (event) {
+            const loginArea = document.getElementById('login_area');
+            loginArea.style.display = "none";
+            const transctionArea = document.getElementById('transction-area');
+            transctionArea.style.display = "block";
+        })
+
+        // diposit btn handaler
+        const dipositBtn = document.getElementById("addDiposit");
+            dipositBtn.addEventListener("click", function(){
+
+                // const dipositAmount = document.getElementById("diposit-amount").value;
+                // const dipositNumber = parseFloat(dipositAmount);
+                // const currentDiposits = document.getElementById("currentDiposit").innerText;
+                // const currentDipositNumber = parseFloat(currentDiposits);
+                // const totalamount = dipositNumber + currentDipositNumber;
+                // document.getElementById("currentDiposit").innerText = totalamount;
+
+                const dipositAmount = getinputNumber("diposit-amount");
+
+                updateSpanText("currentDiposit",dipositAmount);
+                updateSpanText("currentBlance",dipositAmount);
+                
+                document.getElementById("diposit-amount").value = "";
+                
+            })
+        // ==========withdraw btn handaler=======
+            const WithdrawBtn = document.getElementById("addWithdraw");
+            WithdrawBtn.addEventListener("click", function(){
+                
+                const WithdrawNumber = getinputNumber("withdraw-amount");
+
+                updateSpanText("currentWithdraw",WithdrawNumber);
+                updateSpanText("currentBlance",-1*WithdrawNumber);
+
+                document.getElementById("withdraw-amount").value = "";
+
+               
+
+
+                console.log(WithdrawNumber);
+
+            })
+            function getinputNumber(id) {
+                const amount = document.getElementById(id).value;
+                const amountNumber = parseFloat(amount);
+                return amountNumber;
+            }
+
+
+            function updateSpanText(id,dipositNumber) {
+                const current = document.getElementById(id).innerText;
+                const currentNumber = parseFloat(current);
+                const totaBlance = dipositNumber + currentNumber;
+                document.getElementById(id).innerText = totaBlance;
+            }
+
+    </script>
 </body>
 </html>
